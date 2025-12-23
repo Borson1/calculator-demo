@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Tools Hub</title>
+
+<style>
+/* ================= ROOT ================= */
+:root{
+  --bg1:#eef4ff;
+  --bg2:#f7f9fc;
+  --card:rgba(255,255,255,.95);
+  --text:#1f2937;
+  --sub:#6b7280;
+  --accent:#38bdf8;
+  --glow:0 20px 50px rgba(56,189,248,.25);
+}
+
+body.dark{
+  --bg1:#05080f;
+  --bg2:#0b1220;
+  --card:rgba(15,23,42,.85);
+  --text:#e5e7eb;
+  --sub:#9ca3af;
+  --accent:#7dd3fc;
+  --glow:0 25px 60px rgba(124,58,237,.35);
+}
+
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+
+/* ================= BODY ================= */
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(1200px 500px at top,rgba(124,58,237,.12),transparent),
+    linear-gradient(to bottom,var(--bg1),var(--bg2));
+  color:var(--text);
+  transition:.35s ease;
+}
+
+/* ================= HEADER ================= */
+.header{
+  padding:24px 20px 28px;
+  background:linear-gradient(135deg,#1e3a8a,#312e81);
+  color:#fff;
+  box-shadow:var(--glow);
+}
+
+.header h1{
+  margin:0;
+  font-size:24px;
+}
+.header p{
+  margin:8px 0 14px;
+  font-size:14px;
+  opacity:.9;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.actions button{
+  border:none;
+  padding:8px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.18);
+  color:#fff;
+  font-size:13px;
+  backdrop-filter:blur(6px);
+}
+
+/* ================= QUICK TOOLS ================= */
+.quick-tools{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  padding:16px;
+  margin-top:-22px;
+}
+
+.tool-btn{
+  background:var(--card);
+  padding:14px 10px;
+  border-radius:16px;
+  text-align:center;
+  font-size:13px;
+  font-weight:600;
+  box-shadow:var(--glow);
+  cursor:pointer;
+}
+
+/* ================= MAIN CARD ================= */
+.container{
+  background:var(--card);
+  width:92%;
+  max-width:420px;
+  margin:12px auto;
+  padding:22px;
+  border-radius:22px;
+  box-shadow:var(--glow);
+  backdrop-filter:blur(10px);
+}
+
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.tabs button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:12px;
+  background:#020617;
+  color:#fff;
+}
+
+.tabs button.active{
+  background:linear-gradient(135deg,#38bdf8,#6366f1);
+  color:#020617;
+  font-weight:700;
+}
+
+.section{display:none}
+.section.active{display:block}
+
+label{
+  font-size:13px;
+  color:var(--sub);
+}
+
+input,select{
+  width:100%;
+  padding:13px;
+  margin:8px 0 16px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.08);
+  background:rgba(255,255,255,.9);
+  color:var(--text);
+}
+
+body.dark input,
+body.dark select{
+  background:rgba(2,6,23,.7);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.calc-btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#38bdf8,#6366f1);
+  color:#020617;
+  font-weight:800;
+  box-shadow:var(--glow);
+}
+
+.result{
+  margin-top:14px;
+  text-align:center;
+  font-weight:700;
+}
+
+/* ================= EXTRA ================= */
+.extra{
+  padding:20px;
+}
+.extra-card{
+  background:var(--card);
+  padding:16px;
+  border-radius:18px;
+  margin-bottom:14px;
+  box-shadow:var(--glow);
+  font-size:14px;
+}
+
+/* ================= MODAL ================= */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:90px;
+}
+.modal-content{
+  background:var(--card);
+  padding:20px;
+  border-radius:20px;
+  width:88%;
+  max-width:340px;
+  box-shadow:var(--glow);
+}
+
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  font-size:13px;
+  opacity:.85;
+  padding:18px 10px 24px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Smart Tools Hub</h1>
+  <p>All useful calculators in one place</p>
+  <div class="actions">
+    <button onclick="toggleDark()">🌙 Dark</button>
+    <button onclick="openModal('info')">Info</button>
+    <button onclick="openModal('more')">More</button>
+  </div>
+</div>
+
+<!-- QUICK TOOLS -->
+<div class="quick-tools">
+  <div class="tool-btn" onclick="openTab('percent')">Percentage</div>
+  <div class="tool-btn" onclick="openTab('emi')">EMI</div>
+  <div class="tool-btn" onclick="openTab('age')">Age</div>
+  <div class="tool-btn" onclick="openTab('discount')">Discount</div>
+  <div class="tool-btn" onclick="openTab('gst')">GST</div>
+  <div class="tool-btn" onclick="openModal('more')">More Tools</div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+  <div class="tabs">
+    <button class="active" onclick="openTab('percent',this)">%</button>
+    <button onclick="openTab('emi',this)">EMI</button>
+    <button onclick="openTab('age',this)">Age</button>
+  </div>
+
+  <div id="percent" class="section active">
+    <label>Total Value</label>
+    <input id="total" type="number">
+    <label>Percentage %</label>
+    <input id="per" type="number">
+    <button class="calc-btn" onclick="perCalc()">Calculate</button>
+    <div class="result" id="perRes"></div>
+  </div>
+
+  <div id="emi" class="section">
+    <label>Loan Amount</label>
+    <input id="loan" type="number">
+    <label>Interest %</label>
+    <input id="rate" type="number">
+    <label>Months</label>
+    <input id="months" type="number">
+    <button class="calc-btn" onclick="emiCalc()">Calculate</button>
+    <div class="result" id="emiRes"></div>
+  </div>
+
+  <div id="age" class="section">
+    <label>Date of Birth</label>
+    <input id="dob" type="date">
+    <button class="calc-btn" onclick="ageCalc()">Calculate</button>
+    <div class="result" id="ageRes"></div>
+  </div>
+
+  <div id="discount" class="section">
+    <label>Original Price</label>
+    <input id="op" type="number">
+    <label>Discount %</label>
+    <input id="dp" type="number">
+    <button class="calc-btn" onclick="discCalc()">Calculate</button>
+    <div class="result" id="discRes"></div>
+  </div>
+
+  <div id="gst" class="section">
+    <label>Amount</label>
+    <input id="ga" type="number">
+    <label>GST %</label>
+    <select id="gp">
+      <option>5</option><option>12</option><option>18</option><option>28</option>
+    </select>
+    <button class="calc-btn" onclick="gstCalc()">Calculate</button>
+    <div class="result" id="gstRes"></div>
+  </div>
+</div>
+
+<!-- EXTRA INFO -->
+<div class="extra">
+  <div class="extra-card">⚡ Fast & offline calculations</div>
+  <div class="extra-card">📱 Mobile friendly design</div>
+  <div class="extra-card">🎯 Accurate & simple tools</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 - 2027 • BÓRẞÕÑ WÉB🌐
+</footer>
+
+<!-- INFO MODAL -->
+<div class="modal" id="info">
+  <div class="modal-content">
+    <h3>About</h3>
+    <p>
+      Smart Tools Hub is a collection of daily-use calculators
+      like Percentage, EMI, Age, Discount and GST.
+      Simple, fast and works offline.
+    </p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<!-- MORE MODAL -->
+<div class="modal" id="more">
+  <div class="modal-content">
+    <h3>Available Tools</h3>
+    <ul>
+      <li>Percentage Calculator</li>
+      <li>EMI / Loan Calculator</li>
+      <li>Age Calculator</li>
+      <li>Discount Calculator</li>
+      <li>GST Calculator</li>
+    </ul>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+/* DARK MODE */
+if(localStorage.theme==="dark"){
+  document.body.classList.add("dark");
+}
+function toggleDark(){
+  document.body.classList.toggle("dark");
+  localStorage.theme=document.body.classList.contains("dark")?"dark":"light";
+}
+
+/* TABS */
+function openTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* CALCULATIONS */
+function perCalc(){
+  let t=+total.value,p=+per.value;
+  perRes.innerText=t&&p?"Result: "+(t*p/100):"Enter values";
+}
+function emiCalc(){
+  let P=+loan.value,R=+rate.value/1200,N=+months.value;
+  emiRes.innerText=P&&R&&N?
+    "Monthly EMI: ₹"+(P*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1)).toFixed(2)
+    :"Enter values";
+}
+function ageCalc(){
+  if(!dob.value){ageRes.innerText="Select date";return;}
+  let d=new Date(dob.value),n=new Date();
+  let y=n.getFullYear()-d.getFullYear();
+  let m=n.getMonth()-d.getMonth();
+  let da=n.getDate()-d.getDate();
+  if(da<0){m--;da+=30}
+  if(m<0){y--;m+=12}
+  ageRes.innerText=`${y} Years ${m} Months ${da} Days`;
+}
+function discCalc(){
+  let o=+op.value,d=+dp.value;
+  discRes.innerText=o&&d?"Final Price: "+(o-(o*d/100)):"Enter values";
+}
+function gstCalc(){
+  let a=+ga.value,g=+gp.value;
+  gstRes.innerText=a?"Total: "+(a+(a*g/100)):"Enter amount";
+}
+
+/* MODAL */
+function openModal(id){document.getElementById(id).style.display="flex"}
+function closeModal(){document.querySelectorAll('.modal').forEach(m=>m.style.display="none")}
+</script>
+
+</body>
+</html>
