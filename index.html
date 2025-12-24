@@ -6,375 +6,454 @@
 <title>Smart Tools Hub</title>
 
 <style>
-/* ================= ROOT ================= */
 :root{
-  --bg1:#eef4ff;
-  --bg2:#f7f9fc;
-  --card:rgba(255,255,255,.95);
-  --text:#1f2937;
-  --sub:#6b7280;
-  --accent:#38bdf8;
-  --glow:0 20px 50px rgba(56,189,248,.25);
+  --bg1:#eaf3ff;
+  --bg2:#f2f5f8;
+  --card:#ffffff;
+  --text:#222;
+  --sub:#666;
+  --accent:#19c3ff;
 }
 
 body.dark{
-  --bg1:#05080f;
-  --bg2:#0b1220;
-  --card:rgba(15,23,42,.85);
+  --bg1:#020617;
+  --bg2:#0f172a;
+  --card:#111827;
   --text:#e5e7eb;
   --sub:#9ca3af;
-  --accent:#7dd3fc;
-  --glow:0 25px 60px rgba(124,58,237,.35);
+  --accent:#38bdf8;
 }
 
-*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+*{box-sizing:border-box;font-family:Poppins,Arial,sans-serif}
 
-/* ================= BODY ================= */
 body{
   margin:0;
-  min-height:100vh;
-  background:
-    radial-gradient(1200px 500px at top,rgba(124,58,237,.12),transparent),
-    linear-gradient(to bottom,var(--bg1),var(--bg2));
+  background:linear-gradient(to bottom,var(--bg1),var(--bg2));
   color:var(--text);
-  transition:.35s ease;
+  transition:.3s;
+  min-height:100vh;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 .header{
-  padding:24px 20px 28px;
-  background:linear-gradient(135deg,#1e3a8a,#312e81);
+  padding:22px;
+  background:linear-gradient(135deg,#1e293b,#0f172a,#020617);
   color:#fff;
-  box-shadow:var(--glow);
+  border-bottom:2px solid rgba(56,189,248,.3);
 }
 
 .header h1{
   margin:0;
-  font-size:24px;
-}
-.header p{
-  margin:8px 0 14px;
-  font-size:14px;
-  opacity:.9;
+  font-size:26px;
+  font-weight:700;
+  text-align:center;
+  background:linear-gradient(to right,#38bdf8,#818cf8,#c084fc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
+.header p{
+  margin:8px 0 18px;
+  font-size:14px;
+  opacity:.85;
+  text-align:center;
+}
+
+/* ACTION BUTTONS */
 .actions{
   display:flex;
-  gap:10px;
+  justify-content:center;
+  gap:14px;
   flex-wrap:wrap;
 }
+
 .actions button{
   border:none;
-  padding:8px 16px;
-  border-radius:999px;
-  background:rgba(255,255,255,.18);
-  color:#fff;
+  padding:9px 18px;
+  border-radius:22px;
   font-size:13px;
-  backdrop-filter:blur(6px);
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(90deg,#38bdf8,#818cf8,#c084fc);
+  color:#000;
+  box-shadow:0 0 12px var(--accent);
+  animation:btnPulse 2.2s infinite alternate;
 }
 
-/* ================= QUICK TOOLS ================= */
+@keyframes btnPulse{
+  0%{filter:brightness(1)}
+  100%{filter:brightness(1.3)}
+}
+
+/* QUICK TOOLS GRID */
 .quick-tools{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  padding:16px;
-  margin-top:-22px;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  padding:20px;
 }
 
 .tool-btn{
   background:var(--card);
-  padding:14px 10px;
-  border-radius:16px;
+  padding:18px;
+  border-radius:18px;
   text-align:center;
-  font-size:13px;
+  font-size:14px;
   font-weight:600;
-  box-shadow:var(--glow);
+  box-shadow:0 0 16px rgba(56,189,248,.4);
+  border:1px solid rgba(56,189,248,.2);
+  transition:.25s;
   cursor:pointer;
 }
 
-/* ================= MAIN CARD ================= */
+.tool-btn:hover{transform:translateY(-4px);box-shadow:0 0 22px var(--accent)}
+.tool-btn:active{transform:scale(.97)}
+
+.tool-btn h3{
+  margin:12px 0 4px;
+  font-size:16px;
+  font-weight:700;
+}
+
+.tool-btn span{
+  font-size:13px;
+  opacity:.7;
+}
+
+/* HERO TOOL PANEL */
 .container{
   background:var(--card);
   width:92%;
   max-width:420px;
-  margin:12px auto;
-  padding:22px;
+  margin:8px auto;
+  padding:24px;
   border-radius:22px;
-  box-shadow:var(--glow);
-  backdrop-filter:blur(10px);
+  box-shadow:0 0 26px rgba(56,189,248,.35);
+  border:1px solid rgba(56,189,248,.2);
+  animation:cardFloat 3.2s infinite alternate ease-in-out;
+}
+
+@keyframes cardFloat{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-6px)}
 }
 
 .tabs{
   display:flex;
   gap:10px;
-  margin-bottom:18px;
+  margin-bottom:20px;
 }
 
 .tabs button{
   flex:1;
-  padding:10px;
+  padding:12px;
   border:none;
-  border-radius:12px;
-  background:#020617;
+  border-radius:14px;
+  background:#000;
   color:#fff;
+  font-weight:600;
+  font-size:14px;
+  transition:.3s;
+  cursor:pointer;
 }
 
 .tabs button.active{
-  background:linear-gradient(135deg,#38bdf8,#6366f1);
-  color:#020617;
+  background:linear-gradient(90deg,#38bdf8,#818cf8,#c084fc);
+  color:#000;
   font-weight:700;
+  box-shadow:0 0 14px var(--accent);
+  animation:lightPulse 1.6s infinite alternate;
+}
+
+@keyframes lightPulse{
+  0%{box-shadow:0 0 10px var(--accent)}
+  100%{box-shadow:0 0 20px var(--accent)}
 }
 
 .section{display:none}
 .section.active{display:block}
 
-label{
-  font-size:13px;
-  color:var(--sub);
-}
-
+label{font-size:13px;color:var(--sub);font-weight:600}
 input,select{
   width:100%;
   padding:13px;
   margin:8px 0 16px;
-  border-radius:12px;
-  border:1px solid rgba(0,0,0,.08);
-  background:rgba(255,255,255,.9);
+  border-radius:14px;
+  border:1px solid rgba(56,189,248,.25);
+  background:rgba(255,255,255,.05);
   color:var(--text);
+  font-size:14px;
+  transition:.3s;
 }
-
-body.dark input,
-body.dark select{
-  background:rgba(2,6,23,.7);
-  border:1px solid rgba(255,255,255,.08);
-}
+input:focus{outline:none;box-shadow:0 0 14px var(--accent)}
 
 .calc-btn{
   width:100%;
-  padding:14px;
+  padding:15px;
   border:none;
-  border-radius:14px;
-  background:linear-gradient(135deg,#38bdf8,#6366f1);
-  color:#020617;
-  font-weight:800;
-  box-shadow:var(--glow);
+  border-radius:16px;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  background:linear-gradient(90deg,#38bdf8,#818cf8,#c084fc);
+  color:#000;
+  box-shadow:0 0 18px var(--accent);
+  animation:btnPulse 2s infinite alternate;
 }
 
 .result{
-  margin-top:14px;
+  margin-top:10px;
   text-align:center;
   font-weight:700;
+  font-size:15px;
+  background:linear-gradient(to right,#38bdf8,#c084fc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-/* ================= EXTRA ================= */
-.extra{
-  padding:20px;
+/* FEATURE BANNER CARDS */
+.features{
+  padding:22px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
 }
-.extra-card{
+
+.feature-card{
   background:var(--card);
-  padding:16px;
+  padding:18px;
   border-radius:18px;
-  margin-bottom:14px;
-  box-shadow:var(--glow);
-  font-size:14px;
+  box-shadow:0 0 18px rgba(56,189,248,.3);
+  border:1px solid rgba(56,189,248,.15);
+  transition:.3s;
+  cursor:default;
 }
 
-/* ================= MODAL ================= */
+.feature-card:hover{transform:translateY(-3px);box-shadow:0 0 26px var(--accent)}
+
+.feature-card h3{
+  margin:0 0 6px;
+  font-size:16px;
+  font-weight:700;
+  background:linear-gradient(to right,#38bdf8,#818cf8,#c084fc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.feature-card p{margin:0;font-size:13px;opacity:.8}
+
+/* STATS SECTION */
+.stats{
+  padding:26px 20px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  text-align:center;
+}
+
+.stat-box h2{
+  margin:0;
+  font-size:26px;
+  font-weight:800;
+  background:linear-gradient(to right,#38bdf8,#818cf8,#c084fc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.stat-box p{margin:6px 0 0;font-size:13px;opacity:.7}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  font-size:15px;
+  font-weight:800;
+  padding:28px;
+  background:#000;
+  margin-top:12px;
+  border-top:2px solid rgba(56,189,248,.3);
+  letter-spacing:1.2px;
+  background:linear-gradient(to right,#38bdf8,#818cf8,#c084fc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* MODAL */
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.45);
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(6px);
   display:none;
-  align-items:flex-end;
+  align-items:center;
   justify-content:center;
-  padding-bottom:90px;
-}
-.modal-content{
-  background:var(--card);
   padding:20px;
-  border-radius:20px;
-  width:88%;
-  max-width:340px;
-  box-shadow:var(--glow);
+  animation:fadeIn .3s;
 }
 
-/* ================= FOOTER ================= */
-footer{
-  text-align:center;
-  font-size:13px;
+@keyframes fadeIn{
+  0%{opacity:0}
+  100%{opacity:1}
+}
+
+.modal-content{
+  background:var(--card);
+  padding:22px;
+  border-radius:22px;
+  width:90%;
+  max-width:340px;
+  border:1px solid rgba(56,189,248,.2);
+  box-shadow:0 0 30px rgba(56,189,248,.3);
+}
+
+.modal-content h3{
+  margin:0 0 12px;
+  font-size:20px;
+  font-weight:700;
+  background:linear-gradient(to right,#38bdf8,#818cf8,#c084fc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.modal-content p,li,ul{
+  font-size:14px;
+  color:var(--text);
   opacity:.85;
-  padding:18px 10px 24px;
+  line-height:1.5;
+}
+
+.modal-content ul{
+  padding-left:18px;
+  margin-bottom:16px;
+}
+
+.modal-content button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:14px;
+  font-weight:700;
+  cursor:pointer;
+  background:linear-gradient(90deg,#38bdf8,#818cf8,#c084fc);
+  color:#000;
+  box-shadow:0 0 16px var(--accent);
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <h1>Smart Tools Hub</h1>
-  <p>All useful calculators in one place</p>
+  <p>Earn coins, use smart calculators, enjoy premium UI experience</p>
   <div class="actions">
-    <button onclick="toggleDark()">🌙 Dark</button>
-    <button onclick="openModal('info')">Info</button>
-    <button onclick="openModal('more')">More</button>
+    <button onclick="toggleDark()">🌙 Toggle Dark Mode</button>
+    <button onclick="openModal('info')">ℹ App Info</button>
+    <button onclick="openModal('more')">☰ More Tools</button>
   </div>
 </div>
 
-<!-- QUICK TOOLS -->
+<div class="app" id="home">
+  <div class="header">
+    <div>👤 Guest User</div>
+  </div>
+</div>
+
 <div class="quick-tools">
-  <div class="tool-btn" onclick="openTab('percent')">Percentage</div>
-  <div class="tool-btn" onclick="openTab('emi')">EMI</div>
-  <div class="tool-btn" onclick="openTab('age')">Age</div>
-  <div class="tool-btn" onclick="openTab('discount')">Discount</div>
-  <div class="tool-btn" onclick="openTab('gst')">GST</div>
-  <div class="tool-btn" onclick="openModal('more')">More Tools</div>
+  <div class="tool-btn" onclick="openTab('percent')"><h3>Percentage</h3><span>Real Calculation</span></div>
+  <div class="tool-btn" onclick="openTab('emi')"><h3>EMI</h3><span>Loan Tool</span></div>
+  <div class="tool-btn" onclick="openTab('age')"><h3>Age</h3><span>Viral Tool</span></div>
+  <div class="tool-btn" onclick="openTab('discount')"><h3>Discount</h3><span>Shopping Tool</span></div>
+  <div class="tool-btn" onclick="openTab('gst')"><h3>GST</h3><span>India Tool</span></div>
+  <div class="tool-btn" onclick="openModal('more')"><h3>More</h3><span>Extra Tools</span></div>
 </div>
 
-<!-- MAIN -->
 <div class="container">
-  <div class="tabs">
-    <button class="active" onclick="openTab('percent',this)">%</button>
-    <button onclick="openTab('emi',this)">EMI</button>
-    <button onclick="openTab('age',this)">Age</button>
-  </div>
-
-  <div id="percent" class="section active">
+  <div class="section active" id="percent">
     <label>Total Value</label>
-    <input id="total" type="number">
+    <input id="total" type="number" placeholder="Enter total value">
     <label>Percentage %</label>
-    <input id="per" type="number">
+    <input id="per" type="number" placeholder="Enter percentage">
     <button class="calc-btn" onclick="perCalc()">Calculate</button>
     <div class="result" id="perRes"></div>
   </div>
 
-  <div id="emi" class="section">
+  <div class="section" id="emi">
     <label>Loan Amount</label>
-    <input id="loan" type="number">
+    <input id="loan" type="number" placeholder="Enter loan">
     <label>Interest %</label>
-    <input id="rate" type="number">
+    <input id="rate" type="number" placeholder="Interest rate">
     <label>Months</label>
-    <input id="months" type="number">
-    <button class="calc-btn" onclick="emiCalc()">Calculate</button>
+    <input id="months" type="number" placeholder="Enter months">
+    <button class="calc-btn" onclick="emiCalc()">Calculate EMI</button>
     <div class="result" id="emiRes"></div>
   </div>
 
-  <div id="age" class="section">
+  <div class="section" id="age">
     <label>Date of Birth</label>
     <input id="dob" type="date">
-    <button class="calc-btn" onclick="ageCalc()">Calculate</button>
+    <button class="calc-btn" onclick="ageCalc()">Calculate Age</button>
     <div class="result" id="ageRes"></div>
   </div>
 
-  <div id="discount" class="section">
+  <div class="section" id="discount">
     <label>Original Price</label>
-    <input id="op" type="number">
+    <input id="op" type="number" placeholder="Original price">
     <label>Discount %</label>
-    <input id="dp" type="number">
-    <button class="calc-btn" onclick="discCalc()">Calculate</button>
+    <input id="dp" type="number" placeholder="Discount percent">
+    <button class="calc-btn" onclick="discCalc()">Calculate Price</button>
     <div class="result" id="discRes"></div>
   </div>
 
-  <div id="gst" class="section">
+  <div class="section" id="gst">
     <label>Amount</label>
-    <input id="ga" type="number">
+    <input id="ga" type="number" placeholder="Enter amount">
     <label>GST %</label>
     <select id="gp">
       <option>5</option><option>12</option><option>18</option><option>28</option>
     </select>
-    <button class="calc-btn" onclick="gstCalc()">Calculate</button>
+    <button class="calc-btn" onclick="gstCalc()">Calculate GST</button>
     <div class="result" id="gstRes"></div>
   </div>
 </div>
 
-<!-- EXTRA INFO -->
-<div class="extra">
-  <div class="extra-card">⚡ Fast & offline calculations</div>
-  <div class="extra-card">📱 Mobile friendly design</div>
-  <div class="extra-card">🎯 Accurate & simple tools</div>
+<div class="features">
+  <div class="feature-card"><h3>Neon UI</h3><p>Premium glow card design</p></div>
+  <div class="feature-card"><h3>Offline Fast</h3><p>Works without internet</p></div>
+  <div class="feature-card"><h3>Real Tools</h3><p>100% working calculators</p></div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  © 2026 - 2027 • BÓRẞÕÑ WÉB🌐
-</footer>
+<div class="stats">
+  <div class="stat-box"><h2>10K+</h2><p>Active Users</p></div>
+  <div class="stat-box"><h2>99.9%</h2><p>Manual Verify</p></div>
+  <div class="stat-box"><h2>Fast</h2><p>Reward System</p></div>
+  <div class="stat-box"><h2>Secure</h2><p>Safe Earnings</p></div>
+</div>
 
-<!-- INFO MODAL -->
+<footer>© 2026 - 2027 • BÓRẞÕÑ WÉB🌐</footer>
+
 <div class="modal" id="info">
   <div class="modal-content">
-    <h3>About</h3>
-    <p>
-      Smart Tools Hub is a collection of daily-use calculators
-      like Percentage, EMI, Age, Discount and GST.
-      Simple, fast and works offline.
-    </p>
+    <h3>About App</h3>
+    <p>Smart Tools Hub helps users calculate & earn coins with real tools.</p>
     <button onclick="closeModal()">Close</button>
   </div>
 </div>
 
-<!-- MORE MODAL -->
 <div class="modal" id="more">
   <div class="modal-content">
-    <h3>Available Tools</h3>
-    <ul>
-      <li>Percentage Calculator</li>
-      <li>EMI / Loan Calculator</li>
-      <li>Age Calculator</li>
-      <li>Discount Calculator</li>
-      <li>GST Calculator</li>
-    </ul>
+    <h3>More Tools</h3>
+    <ul><li>Calculator</li><li>EMI</li><li>Age</li><li>Discount</li><li>GST</li></ul>
     <button onclick="closeModal()">Close</button>
   </div>
 </div>
 
 <script>
-/* DARK MODE */
-if(localStorage.theme==="dark"){
-  document.body.classList.add("dark");
-}
-function toggleDark(){
-  document.body.classList.toggle("dark");
-  localStorage.theme=document.body.classList.contains("dark")?"dark":"light";
-}
-
-/* TABS */
-function openTab(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-/* CALCULATIONS */
-function perCalc(){
-  let t=+total.value,p=+per.value;
-  perRes.innerText=t&&p?"Result: "+(t*p/100):"Enter values";
-}
-function emiCalc(){
-  let P=+loan.value,R=+rate.value/1200,N=+months.value;
-  emiRes.innerText=P&&R&&N?
-    "Monthly EMI: ₹"+(P*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1)).toFixed(2)
-    :"Enter values";
-}
-function ageCalc(){
-  if(!dob.value){ageRes.innerText="Select date";return;}
-  let d=new Date(dob.value),n=new Date();
-  let y=n.getFullYear()-d.getFullYear();
-  let m=n.getMonth()-d.getMonth();
-  let da=n.getDate()-d.getDate();
-  if(da<0){m--;da+=30}
-  if(m<0){y--;m+=12}
-  ageRes.innerText=`${y} Years ${m} Months ${da} Days`;
-}
-function discCalc(){
-  let o=+op.value,d=+dp.value;
-  discRes.innerText=o&&d?"Final Price: "+(o-(o*d/100)):"Enter values";
-}
-function gstCalc(){
-  let a=+ga.value,g=+gp.value;
-  gstRes.innerText=a?"Total: "+(a+(a*g/100)):"Enter amount";
-}
-
-/* MODAL */
+function toggleDark(){document.body.classList.toggle("dark")}
+function openTab(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function perCalc(){let t=+total.value,p=+per.value;perRes.innerText=t&&p?"Result: "+(t*p/100):"Enter values"}
+function emiCalc(){let P=+loan.value,R=+rate.value/1200,N=+months.value;emiRes.innerText=P&&R&&N?"Monthly EMI: ₹"+(P*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1)).toFixed(2):"Enter values"}
+function ageCalc(){if(!dob.value){ageRes.innerText="Select date";return;}let d=new Date(dob.value),n=new Date();let y=n.getFullYear()-d.getFullYear(),m=n.getMonth()-d.getMonth(),da=n.getDate()-d.getDate();if(da<0){m--;da+=30}if(m<0){y--;m+=12}ageRes.innerText=`${y} Years ${m} Months ${da} Days`}
+function discCalc(){let o=+op.value,d=+dp.value;discRes.innerText=o&&d?"Final Price: "+(o-(o*d/100)):"Enter values"}
+function gstCalc(){let a=+ga.value,g=+gp.value;gstRes.innerText=a?"Total: "+(a+(a*g/100)):"Enter amount"}
 function openModal(id){document.getElementById(id).style.display="flex"}
 function closeModal(){document.querySelectorAll('.modal').forEach(m=>m.style.display="none")}
 </script>
